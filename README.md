@@ -1,5 +1,5 @@
 # docker-mysql
-Run MySql, SQLBuddy, Adminer, and phpMyAdmin Insider Docker
+Run MySQL, SQLBuddy, Adminer, and phpMyAdmin Insider Docker
 
 ## build
 Run ```./build``` to build image.
@@ -15,6 +15,12 @@ Point browser to ```http://<host>/sqlbuddy```
 
 ## Adminer
 Point browser to ```http://<host>/adminer```
+
+## Login
+Login as user ```root```, no password.
+
+## MySQL
+Connect to port 3306.
 
 ## data (optional)
 1. Put your data into a file ```data.sql```.
