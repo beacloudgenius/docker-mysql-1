@@ -55,6 +55,7 @@ RUN mkdir -p /var/www && \
 #    mysqladmin shutdown
 
 #configuration
+COPY index.html /var/www/
 COPY config.inc.php /var/www/phpmyadmin/
 COPY nginx.conf /etc/nginx/
 
