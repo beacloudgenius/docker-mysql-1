@@ -19,7 +19,7 @@ RUN apt-get install -y nginx
 
 #MySQL
 RUN wget -O - "http://pgp.mit.edu/pks/lookup?op=get&search=0x8C718D3B5072E1F5" | apt-key add - && \
-    echo "deb http://repo.mysql.com/apt/ubuntu/ trusty mysql-5.6" > /etc/apt/sources.list.d/mysql.list && \
+    echo "deb http://repo.mysql.com/apt/ubuntu/ trusty mysql-5.7" > /etc/apt/sources.list.d/mysql.list && \
     apt-get update
 RUN apt-get install -y mysql-server && \
     sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/my.cnf
