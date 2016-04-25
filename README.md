@@ -26,3 +26,4 @@ Connect to port 3306.
 1. Put your data into a file ```data.sql```.
 2. In Dockerfile, uncomment the ```#data``` section.
 3. Rebuild the image.
+Run MySQL Inside Docker

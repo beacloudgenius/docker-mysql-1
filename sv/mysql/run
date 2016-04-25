@@ -5,5 +5,10 @@
 source /etc/envvars
 env
 
+chown -R mysql:mysql /var/lib/mysql
+if [ ! -f /var/lib/mysql/ibdata1 ]; then
+   mysqld --initialize
+fi
+
 exec 2>&1
 exec /usr/bin/mysqld_safe
