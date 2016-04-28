@@ -22,8 +22,7 @@ RUN apt-get install -y nginx
 RUN wget http://dev.mysql.com/get/mysql-apt-config_0.7.2-1_all.deb && \
     dpkg -i *.deb && \
     apt-get update
-RUN apt-get install -y mysql-server && \
-    sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/my.cnf
+RUN apt-get install -y mysql-server
 
 #PHP-FPM
 RUN apt-get install -y php5-fpm php5-mysql
@@ -52,6 +51,14 @@ RUN mkdir -p /var/www && \
 #memcached plugin
 RUN apt-get install -y libevent-dev
 
+#configuration
+RUN sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/my.cnf
+COPY custom.cnf /etc/mysql/conf.d/
+
+COPY index.html /var/www/
+COPY config.inc.php /var/www/phpmyadmin/
+COPY nginx.conf /etc/nginx/
+
 #data
 COPY mysql.ddl /
 #COPY data.sql /
@@ -60,11 +67,6 @@ RUN mysqld_safe & mysqladmin --wait=5 ping && \
     mysql < mysql.ddl && \
 #    mysql -u root < data.sql && \
     mysqladmin shutdown
-
-#configuration
-COPY index.html /var/www/
-COPY config.inc.php /var/www/phpmyadmin/
-COPY nginx.conf /etc/nginx/
 
 # Add runit services
 COPY sv /etc/service 
