@@ -3,7 +3,8 @@
 #sv start socklog-unix || exit 1
 
 source /etc/envvars
-env
+
+mkdir -p /run/php
 
 exec 2>&1
-exec php5-fpm --nodaemonize
+exec php-fpm7.0 --nodaemonize
