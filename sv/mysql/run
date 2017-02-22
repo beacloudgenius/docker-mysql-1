@@ -4,10 +4,13 @@
 
 source /etc/envvars
 
+mkdir -p /var/log/mysql
+chown -R mysql:mysql /var/log/mysql
+
 chown -R mysql:mysql /var/lib/mysql
 if [ ! -f /var/lib/mysql/ibdata1 ]; then
-   mysqld --initialize
+   mysqld --initialize-insecure
 fi
 
 exec 2>&1
-exec /usr/bin/mysqld_safe
+exec /usr/bin/mysqld_safe --skip-syslog
