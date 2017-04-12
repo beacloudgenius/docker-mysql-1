@@ -20,7 +20,7 @@ RUN apt-get install -y --no-install-recommends vim less net-tools inetutils-ping
 RUN apt-get install -y nginx
 
 #MySQL
-RUN wget http://dev.mysql.com/get/mysql-apt-config_0.8.2-1_all.deb && \
+RUN wget http://dev.mysql.com/get/mysql-apt-config_0.8.4-1_all.deb && \
     dpkg -i *.deb && \
     apt-get update
 RUN apt-get install -y mysql-server
