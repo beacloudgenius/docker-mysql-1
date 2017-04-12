@@ -30,7 +30,7 @@ RUN apt-get install -y php-fpm php-mysql php-mbstring
 RUN sed -i "s|;cgi.fix_pathinfo=1|cgi.fix_pathinfo=0|" /etc/php/7.0/fpm/php.ini
 
 #phpAdmin
-RUN wget -O - https://files.phpmyadmin.net/phpMyAdmin/4.6.5.2/phpMyAdmin-4.6.5.2-all-languages.tar.gz | tar zx -C /var/www/html --strip-components=1
+RUN wget -O - https://files.phpmyadmin.net/phpMyAdmin/4.7.0/phpMyAdmin-4.7.0-all-languages.tar.gz | tar zx -C /var/www/html --strip-components=1
 
 #memcached plugin
 RUN apt-get install -y libevent-dev
