@@ -1,2 +1,5 @@
+[mysqld]
+max_connections=500
+
 [custom]
 innodb_file_format = Barracuda
