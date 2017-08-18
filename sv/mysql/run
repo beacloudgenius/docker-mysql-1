@@ -7,10 +7,20 @@ source /etc/envvars
 mkdir -p /var/log/mysql
 chown -R mysql:mysql /var/log/mysql
 
-chown -R mysql:mysql /var/lib/mysql
-if [ ! -f /var/lib/mysql/ibdata1 ]; then
+if [ ! "$(ls -A /var/lib/mysql/ibdata1)" ]; then
+   #mkdir -p /var/lib/mysql
+   #chown -R mysql:mysql /var/lib/mysql
    mysqld --initialize-insecure
+   chown -R mysql:mysql /var/lib/mysql
+
+   /usr/bin/mysqld_safe --skip-syslog & 
+   mysqladmin --wait=5 ping
+   mysql < /usr/share/mysql/innodb_memcached_config.sql
+   mysql < /mysql.ddl
+   mysqladmin shutdown
 fi
+
+chown -R mysql:mysql /var/lib/mysql
 
 exec 2>&1
 exec /usr/bin/mysqld_safe --skip-syslog
