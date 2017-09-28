@@ -8,8 +8,6 @@ mkdir -p /var/log/mysql
 chown -R mysql:mysql /var/log/mysql
 
 if [ ! "$(ls -A /var/lib/mysql/ibdata1)" ]; then
-   #mkdir -p /var/lib/mysql
-   #chown -R mysql:mysql /var/lib/mysql
    mysqld --initialize-insecure
    chown -R mysql:mysql /var/lib/mysql
 

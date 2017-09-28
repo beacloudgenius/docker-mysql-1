@@ -35,21 +35,15 @@ RUN wget -O - https://files.phpmyadmin.net/phpMyAdmin/4.7.0/phpMyAdmin-4.7.0-all
 #memcached plugin
 RUN apt-get install -y libevent-dev
 
+#remove default db
+RUN rm -r /var/lib/mysql
+
 #configuration
 RUN sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mysql/mysql.conf.d/mysqld.cnf
 COPY custom.cnf /etc/mysql/conf.d/
 
 COPY config.inc.php /var/www/html
 COPY default /etc/nginx/sites-enabled/
-
-#data
-COPY mysql.ddl /
-#COPY data.sql /
-RUN mysqld_safe & mysqladmin --wait=5 ping && \
-    mysql < /usr/share/mysql/innodb_memcached_config.sql && \
-    mysql < mysql.ddl && \
-#    mysql -u root < data.sql && \
-    mysqladmin shutdown
 
 # Add runit services
 COPY sv /etc/service 
